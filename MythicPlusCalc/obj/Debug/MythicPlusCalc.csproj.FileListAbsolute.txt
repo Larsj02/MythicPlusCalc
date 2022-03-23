@@ -1,0 +1,17 @@
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\bin\Debug\MythicPlusCalc.exe.config
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\bin\Debug\MythicPlusCalc.exe
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\bin\Debug\MythicPlusCalc.pdb
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\obj\Debug\MythicPlusCalc.csprojAssemblyReference.cache
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\obj\Debug\MythicPlusCalc.Form1.resources
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\obj\Debug\MythicPlusCalc.Properties.Resources.resources
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\obj\Debug\MythicPlusCalc.csproj.GenerateResource.cache
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\obj\Debug\MythicPlusCalc.csproj.CoreCompileInputs.cache
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\obj\Debug\MythicPlusCalc.exe
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\obj\Debug\MythicPlusCalc.pdb
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\bin\Debug\MythicPlusCalc.exe.manifest
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\bin\Debug\MythicPlusCalc.application
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\obj\Debug\MythicPlusCalc.exe.manifest
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\obj\Debug\MythicPlusCalc.application
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\bin\Debug\Newtonsoft.Json.dll
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\bin\Debug\Newtonsoft.Json.xml
+C:\Users\lars2\source\repos\MythicPlusCalc\MythicPlusCalc\obj\Debug\MythicPlusCalc.csproj.CopyComplete
