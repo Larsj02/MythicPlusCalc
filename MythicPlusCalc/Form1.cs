@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
@@ -15,20 +9,24 @@ namespace MythicPlusCalc
     public partial class Form1 : Form
     {
         public Point mouseLocation;
+        public double score = 0;
         public Form1()
         {
             InitializeComponent();
+            //Anwendungseinstellungen Laden
             nameInput.Text = Properties.Settings.Default.Name;
             realmInput.Text = Properties.Settings.Default.Realm;
         }
 
-        private void mouse_Down(object sender, MouseEventArgs e)
+        private void Mouse_Down(object sender, MouseEventArgs e)
         {
+            //Sobald man klickt die Maus Position nehmen
             mouseLocation = new Point(-e.X, -e.Y);
         }
 
-        private void mouse_Move(object sender, MouseEventArgs e)
+        private void Mouse_Move(object sender, MouseEventArgs e)
         {
+            //Falls die Linke Maustaste gedrückt wird das Fenster zur Position der Maus bewegen
             if(e.Button == MouseButtons.Left)
             {
                 Point mousePose = Control.MousePosition;
@@ -39,13 +37,28 @@ namespace MythicPlusCalc
 
         private void Exit_Click(object sender, EventArgs e)
         {
+            //Anwendung Schließen
             Application.Exit();
+        }
+
+        //Überprüfen welche Zahl größer ist um den Score richtig zu berechnen
+        private void CompareDungeon(int T, int F)
+        {
+            if (T >= F)
+            {
+                score += Calc_Score(T);
+                score += (Calc_Score(F) / 3);
+            }
+            else
+            {
+                score += Calc_Score(F);
+                score += (Calc_Score(T) / 3);
+            }
         }
 
         private void calcButton_Click(object sender, EventArgs e)
         {
-            double score = 0;
-
+            //Versuchen alle Textboxen in int's umzuwandeln und damit den Score zu berechnen
             try
             {
                 int HoATS = int.Parse(HoAT.Text);
@@ -78,115 +91,16 @@ namespace MythicPlusCalc
                 int STRTSTS = int.Parse(STRTST.Text);
                 int STRTSFS = int.Parse(STRTSF.Text);
 
-                if (HoATS >= HoAFS)
-                {
-                    score = score + calc_Score(HoATS);
-                    score = score + (calc_Score(HoAFS) / 3);
-                }
-                else
-                {
-                    score = score + calc_Score(HoAFS);
-                    score = score + (calc_Score(HoATS) / 3);
-                }
-
-                if (SDTS >= SDFS)
-                {
-                    score = score + calc_Score(SDTS);
-                    score = score + (calc_Score(SDFS) / 3);
-                }
-                else
-                {
-                    score = score + calc_Score(SDFS);
-                    score = score + (calc_Score(SDTS) / 3);
-                }
-
-                if (DoSTS >= DoSFS)
-                {
-                    score = score + calc_Score(DoSTS);
-                    score = score + (calc_Score(DoSFS) / 3);
-                }
-                else
-                {
-                    score = score + calc_Score(DoSFS);
-                    score = score + (calc_Score(DoSTS) / 3);
-                }
-
-                if (MoTSTS >= MoTSFS)
-                {
-                    score = score + calc_Score(MoTSTS);
-                    score = score + (calc_Score(MoTSFS) / 3);
-                }
-                else
-                {
-                    score = score + calc_Score(MoTSFS);
-                    score = score + (calc_Score(MoTSTS) / 3);
-                }
-
-                if (NWTS >= NWFS)
-                {
-                    score = score + calc_Score(NWTS);
-                    score = score + (calc_Score(NWFS) / 3);
-                }
-                else
-                {
-                    score = score + calc_Score(NWFS);
-                    score = score + (calc_Score(NWTS) / 3);
-                }
-
-                if (SoATS >= SoAFS)
-                {
-                    score = score + calc_Score(SoATS);
-                    score = score + (calc_Score(SoAFS) / 3);
-                }
-                else
-                {
-                    score = score + calc_Score(SoAFS);
-                    score = score + (calc_Score(SoATS) / 3);
-                }
-
-                if (ToPTS >= ToPFS)
-                {
-                    score = score + calc_Score(ToPTS);
-                    score = score + (calc_Score(ToPFS) / 3);
-                }
-                else
-                {
-                    score = score + calc_Score(ToPFS);
-                    score = score + (calc_Score(ToPTS) / 3);
-                }
-
-                if (PFTS >= PFFS)
-                {
-                    score = score + calc_Score(PFTS);
-                    score = score + (calc_Score(PFFS) / 3);
-                }
-                else
-                {
-                    score = score + calc_Score(PFFS);
-                    score = score + (calc_Score(PFTS) / 3);
-                }
-
-                if (GMBTTS >= GMBTFS)
-                {
-                    score = score + calc_Score(GMBTTS);
-                    score = score + (calc_Score(GMBTFS) / 3);
-                }
-                else
-                {
-                    score = score + calc_Score(GMBTFS);
-                    score = score + (calc_Score(GMBTTS) / 3);
-                }
-
-                if (STRTSTS >= STRTSFS)
-                {
-                    score = score + calc_Score(STRTSTS);
-                    score = score + (calc_Score(STRTSFS) / 3);
-                }
-                else
-                {
-                    score = score + calc_Score(STRTSFS);
-                    score = score + (calc_Score(STRTSTS) / 3);
-                }
+                CompareDungeon(HoATS, HoAFS);
+                CompareDungeon(SDTS, SDFS);
+                CompareDungeon(DoSTS, DoSFS);
+                CompareDungeon(MoTSTS, MoTSFS);
+                CompareDungeon(NWTS, NWFS);
+                CompareDungeon(SoATS, SoAFS);
+                CompareDungeon(ToPTS, ToPFS);
+                CompareDungeon(PFTS, PFFS);
+                CompareDungeon(GMBTTS, GMBTFS);
+                CompareDungeon(STRTSTS, STRTSFS);
                 scoreLabel.Text = score.ToString("F2");
                 scoreLabel.Visible = true;
             }
@@ -195,89 +109,91 @@ namespace MythicPlusCalc
                 MessageBox.Show("Bitte alle Felder ausfüllen!");
             }
 
-            if (score >= 150)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#2ECC71");
-            } 
-            if (score >= 300)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#30BF8B");
-            }
-            if (score >= 450)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#31B2A5");
-            }
-            if (score >= 600)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#32AAB5");
-            }
-            if (score >= 750)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#33A1C9");
-            }
-            if (score >= 900)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#3498DB");
-            }
-            if (score >= 1050)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#4190D6");
-            }
-            if (score >= 1200)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#5087D1");
-            }
-            if (score >= 1350)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#5C80CD");
-            }
-            if (score >= 1500)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#6879C9");
-            }
-            if (score >= 1650)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#7770C4");
-            }
-            if (score >= 1800)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#8865BD");
-            }
-            if (score >= 1950)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#9B59B6");
-            }
-            if (score >= 2100)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#A55EA2");
-            }
-            if (score >= 2250)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#B1648B");
-            }
-            if (score >= 2400)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#C16C6B");
-            }
-            if (score >= 2550)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#CA7159");
-            }
-            if (score >= 2700)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#D37547");
-            }
-            if (score >= 2850)
-            {
-                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#DD7A35");
-            }
+            //Textfarbe je nach höhe des Scores festlegen
             if (score >= 3000)
             {
                 scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#E67E22");
             }
+            else if (score >= 2850)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#DD7A35");
+            }
+            else if (score >= 2700)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#D37547");
+            }
+            else if (score >= 2550)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#CA7159");
+            }
+            else if(score >= 2400)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#C16C6B");
+            }
+            else if (score >= 2250)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#B1648B");
+            }
+            else if (score >= 2100)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#A55EA2");
+            }
+            else if (score >= 1950)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#9B59B6");
+            }
+            else if (score >= 1800)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#8865BD");
+            }
+            else if (score >= 1650)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#7770C4");
+            }
+            else if (score >= 1500)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#6879C9");
+            }
+            else if (score >= 1350)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#5C80CD");
+            }
+            else if (score >= 1200)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#5087D1");
+            }
+            else if (score >= 1050)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#4190D6");
+            }
+            else if (score >= 900)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#3498DB");
+            }
+            else if (score >= 750)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#33A1C9");
+            }
+            else if (score >= 600)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#32AAB5");
+            }
+            else if (score >= 450)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#31B2A5");
+            }
+            else if (score >= 300)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#30BF8B");
+            }
+            else if (score >= 150)
+            {
+                scoreLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml("#2ECC71");
+            } 
         }
 
-        public void setLevels(String dungeon, String level, String affix)
+        //Textboxen mit Werten füllen
+        public void SetLevels(String dungeon, String level, String affix)
         {
             if (affix == "Tyrannical")
             {
@@ -353,7 +269,8 @@ namespace MythicPlusCalc
             }
         }
 
-        public dynamic jsonRequest(String playerName, String realmName, String requestField)
+        //Json Datei aus der API abrufen
+        public dynamic JsonRequest(String playerName, String realmName, String requestField)
         {
             try
             {
@@ -368,7 +285,8 @@ namespace MythicPlusCalc
             return null;
         }
 
-        private double calc_Score(int Level)
+        //Werte je nach Level berechnen
+        private double Calc_Score(int Level)
         {
             double score = Level * 7.5;
             if(Level >= 10)
@@ -385,6 +303,7 @@ namespace MythicPlusCalc
             return score;
         }
 
+        //Überprüfung dass nur Zahlen in der Textbox benutzt werden
         private void STRTST_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -394,12 +313,13 @@ namespace MythicPlusCalc
             }
         }
 
-        private void setScore_Click(object sender, EventArgs e)
+        //Textboxen mit API Werten füllen
+        private void SetScore_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Name = nameInput.Text;
             Properties.Settings.Default.Realm = realmInput.Text;
             Properties.Settings.Default.Save();
-            var bestRuns = jsonRequest(nameInput.Text, realmInput.Text, "mythic_plus_best_runs");
+            var bestRuns = JsonRequest(nameInput.Text, realmInput.Text, "mythic_plus_best_runs");
             if (bestRuns != null)
             {
                 foreach (var item in bestRuns["mythic_plus_best_runs"])
@@ -409,7 +329,7 @@ namespace MythicPlusCalc
                         String affixName = affix["name"];
                         String dungeon = item["short_name"];
                         String level = item["mythic_level"];
-                        setLevels(dungeon, level, affixName);
+                        SetLevels(dungeon, level, affixName);
                     }
                 }
             }
@@ -417,7 +337,7 @@ namespace MythicPlusCalc
             {
                 return;
             }
-            var alternateRuns = jsonRequest(nameInput.Text, realmInput.Text, "mythic_plus_alternate_runs");
+            var alternateRuns = JsonRequest(nameInput.Text, realmInput.Text, "mythic_plus_alternate_runs");
             if(alternateRuns != null)
             {
                 foreach (var item in alternateRuns["mythic_plus_alternate_runs"])
@@ -427,7 +347,7 @@ namespace MythicPlusCalc
                         String affixName = affix["name"];
                         String dungeon = item["short_name"];
                         String level = item["mythic_level"];
-                        setLevels(dungeon, level, affixName);
+                        SetLevels(dungeon, level, affixName);
                     }
                 }
             }

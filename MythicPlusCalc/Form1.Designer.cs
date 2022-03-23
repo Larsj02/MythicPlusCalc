@@ -107,8 +107,8 @@ namespace MythicPlusCalc
             this.panel1.Controls.Add(this.Exit);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
-            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouse_Down);
-            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mouse_Move);
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Mouse_Down);
+            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Mouse_Move);
             // 
             // pictureBox13
             // 
@@ -433,7 +433,7 @@ namespace MythicPlusCalc
             this.setScore.ForeColor = System.Drawing.Color.White;
             this.setScore.Name = "setScore";
             this.setScore.UseVisualStyleBackColor = false;
-            this.setScore.Click += new System.EventHandler(this.setScore_Click);
+            this.setScore.Click += new System.EventHandler(this.SetScore_Click);
             // 
             // Form1
             // 
